@@ -17,7 +17,7 @@ export class EstatesController {
     searchAllEstatesByCity = (req: express.Request, res: express.Response) => {
         let cityQuery = req.body.cityQuery;
 
-        Estate.find({ 'city': cityQuery },
+        Estate.find({ 'city': { $regex: cityQuery } },
             (err, estates) => {
                 if (err) console.log(err);
                 else {
