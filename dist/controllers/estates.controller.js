@@ -19,7 +19,7 @@ class EstatesController {
         };
         this.searchAllEstatesByCity = (req, res) => {
             let cityQuery = req.body.cityQuery;
-            estate_1.default.find({ 'city': cityQuery }, (err, estates) => {
+            estate_1.default.find({ 'city': { $regex: cityQuery } }, (err, estates) => {
                 if (err)
                     console.log(err);
                 else {
