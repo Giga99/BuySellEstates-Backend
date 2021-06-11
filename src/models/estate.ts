@@ -25,6 +25,10 @@ let Estate = new Schema(
             type: String,
             required: true
         },
+        address: {
+            type: String,
+            required: true
+        },
         priceToBuy: {
             type: Number,
             required: false
