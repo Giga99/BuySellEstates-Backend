@@ -11,7 +11,7 @@ export class AuthController {
             { 'username': username, 'password': password, 'userType': userType },
             (err, user) => {
                 if (err) console.log(err);
-                else res.json(user);
+                else res.status(200).json(user);
             }
         );
     }
@@ -38,10 +38,14 @@ export class AuthController {
                 if (err) console.log(err);
                 else {
                     if (user) {
-                        User.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } });
-                        res.json({ 'message': 'password updated' });
+                        User.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } }).then((block) => {
+                            res.status(200).json({ 'message': 'password updated' });
+                        }).catch((err) => {
+                            console.log(err);
+                            res.status(400).json({ 'message': err });
+                        });
                     } else {
-                        res.json({ 'message': 'user not found' });
+                        res.status(400).json({ 'message': 'user not found' });
                     }
                 }
             }

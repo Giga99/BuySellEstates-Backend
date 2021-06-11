@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import authRouter from './routes/auth.routes';
 import estatesRouter from './routes/estates.routes';
+import usersRouter from './routes/estates.routes';
 
 const app = express();
 
@@ -19,6 +20,7 @@ connection.once('open', () => {
 const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/estates', estatesRouter);
+router.use('/users', usersRouter)
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

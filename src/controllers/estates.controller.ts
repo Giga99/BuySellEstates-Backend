@@ -5,25 +5,29 @@ export class EstatesController {
     searchAllEstatesByTitle = (req: express.Request, res: express.Response) => {
         let searchQuery = req.body.searchQuery;
 
-        Estate.find({ 'title': { $regex: searchQuery } },
+        Estate.find(
+            { 'title': { $regex: searchQuery } },
             (err, estates) => {
                 if (err) console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
-            })
+            }
+        )
     }
 
     searchAllEstatesByCity = (req: express.Request, res: express.Response) => {
         let cityQuery = req.body.cityQuery;
 
-        Estate.find({ 'city': { $regex: cityQuery } },
+        Estate.find(
+            { 'city': { $regex: cityQuery } },
             (err, estates) => {
                 if (err) console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
-            })
+            }
+        )
     }
 
     searchAllEstatesByPrice = (req: express.Request, res: express.Response) => {
@@ -32,34 +36,40 @@ export class EstatesController {
         let priceHigherLimit = req.body.priceHigherLimit;
 
         if (rentOrSale == 'sale') {
-            Estate.find({ 'rentOrSale': 'sale', 'priceToBuy': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
+            Estate.find(
+                { 'rentOrSale': 'sale', 'priceToBuy': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
                 (err, estates) => {
                     if (err) console.log(err);
                     else {
-                        res.json(estates);
+                        res.status(200).json(estates);
                     }
-                })
+                }
+            )
         } else {
-            Estate.find({ 'rentOrSale': 'rent', 'priceToRent': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
+            Estate.find(
+                { 'rentOrSale': 'rent', 'priceToRent': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
                 (err, estates) => {
                     if (err) console.log(err);
                     else {
-                        res.json(estates);
+                        res.status(200).json(estates);
                     }
-                })
+                }
+            )
         }
     }
 
     getEstateById = (req: express.Request, res: express.Response) => {
         let id = req.body.id;
 
-        Estate.findOne({ 'id': id },
+        Estate.findOne(
+            { 'id': id },
             (err, estate) => {
                 if (err) console.log(err);
                 else {
-                    res.json(estate);
+                    res.status(200).json(estate);
                 }
-            })
+            }
+        )
     }
 
     getPromotedEstates = (req: express.Request, res: express.Response) => {
@@ -67,7 +77,7 @@ export class EstatesController {
             (err, estates) => {
                 if (err) console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
             })
     }

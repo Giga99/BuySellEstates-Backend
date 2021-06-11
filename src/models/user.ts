@@ -40,7 +40,13 @@ let User = new Schema(
         },
         accepted: {
             type: Boolean,
-            required: true
+            required: true,
+            default: false
+        },
+        reviewed: {
+            type: Boolean,
+            required: true,
+            default: false
         },
         userType: {
             type: String,
