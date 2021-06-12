@@ -13,7 +13,7 @@ class EstatesController {
                 if (err)
                     console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
             });
         };
@@ -23,7 +23,7 @@ class EstatesController {
                 if (err)
                     console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
             });
         };
@@ -36,7 +36,7 @@ class EstatesController {
                     if (err)
                         console.log(err);
                     else {
-                        res.json(estates);
+                        res.status(200).json(estates);
                     }
                 });
             }
@@ -45,7 +45,7 @@ class EstatesController {
                     if (err)
                         console.log(err);
                     else {
-                        res.json(estates);
+                        res.status(200).json(estates);
                     }
                 });
             }
@@ -56,7 +56,7 @@ class EstatesController {
                 if (err)
                     console.log(err);
                 else {
-                    res.json(estate);
+                    res.status(200).json(estate);
                 }
             });
         };
@@ -65,7 +65,7 @@ class EstatesController {
                 if (err)
                     console.log(err);
                 else {
-                    res.json(estates);
+                    res.status(200).json(estates);
                 }
             });
         };

@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import authRouter from './routes/auth.routes';
 import estatesRouter from './routes/estates.routes';
-import usersRouter from './routes/estates.routes';
+import usersRouter from './routes/users.routes';
 
 const app = express();
 

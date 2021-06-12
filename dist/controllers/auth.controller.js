@@ -15,7 +15,7 @@ class AuthController {
                 if (err)
                     console.log(err);
                 else
-                    res.json(user);
+                    res.status(200).json(user);
             });
         };
         this.register = (req, res) => {
@@ -36,11 +36,15 @@ class AuthController {
                     console.log(err);
                 else {
                     if (user) {
-                        user_1.default.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } });
-                        res.json({ 'message': 'password updated' });
+                        user_1.default.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } }).then((block) => {
+                            res.status(200).json({ 'message': 'password updated' });
+                        }).catch((err) => {
+                            console.log(err);
+                            res.status(400).json({ 'message': err });
+                        });
                     }
                     else {
-                        res.json({ 'message': 'user not found' });
+                        res.status(400).json({ 'message': 'user not found' });
                     }
                 }
             });

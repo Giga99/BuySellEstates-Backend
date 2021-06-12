@@ -18,11 +18,11 @@ usersRouter.route('/answerUserRegistration').post(
     (req, res) => new UsersController().answerUserRegistration(req, res)
 );
 
-usersRouter.route('/deleteUser').get(
+usersRouter.route('/deleteUser').delete(
     (req, res) => new UsersController().deleteUser(req, res)
 );
 
-usersRouter.route('/blockUnblockUser').get(
+usersRouter.route('/blockUnblockUser').post(
     (req, res) => new UsersController().blockUnblockUser(req, res)
 );
 
