@@ -180,4 +180,22 @@ export class UsersController {
             }
         );
     }
+
+    getUserByUsername = (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+
+        User.findOne(
+            { 'username': username },
+            (err, user) => {
+                if(err) console.log(err)
+                else {
+                    if (user) {
+                        res.status(200).json(user);
+                    } else {
+                        res.status(400).json({ 'message': 'user not found' });
+                    }
+                }
+            }
+        )
+    }
 }

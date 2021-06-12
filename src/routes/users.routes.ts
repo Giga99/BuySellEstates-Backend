@@ -26,4 +26,8 @@ usersRouter.route('/blockUnblockUser').post(
     (req, res) => new UsersController().blockUnblockUser(req, res)
 );
 
+usersRouter.route('/getUserByUsername').post(
+    (req, res) => new UsersController().getUserByUsername(req, res)
+);
+
 export default usersRouter;
