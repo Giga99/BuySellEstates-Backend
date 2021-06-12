@@ -8,8 +8,8 @@ const Schema = mongoose_1.default.Schema;
 let Estate = new Schema({
     id: {
         type: Number,
-        required: true,
-        unique: true
+        unique: true,
+        auto: true
     },
     title: {
         type: String,

@@ -81,6 +81,7 @@ class EstatesController {
         };
         this.addEstate = (req, res) => {
             let estate = new estate_1.default(req.body);
+            estate['id'] = 8;
             estate.save().then(() => {
                 res.status(200).json({ 'message': 'estate added' });
             }).catch((err) => {

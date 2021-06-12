@@ -95,14 +95,20 @@ export class EstatesController {
     }
 
     addEstate = (req: express.Request, res: express.Response) => {
-        let estate = new Estate(req.body);
-
-        estate.save().then(() => {
-            res.status(200).json({ 'message': 'estate added' });
-        }).catch((err) => {
-            console.log(err);
-            res.status(400).json({ 'message': err });
-        });
+        Estate.find({}, (err, etates) => {
+            if (err) console.log(err);
+            else {
+                let id = etates.length + 1;
+                let estate = new Estate(req.body);
+                estate.id = id;
+                estate.save().then(() => {
+                    res.status(200).json({ 'message': 'estate added' });
+                }).catch((err) => {
+                    console.log(err);
+                    res.status(400).json({ 'message': err });
+                });
+            }
+        })
     }
 
     updateEstate = (req: express.Request, res: express.Response) => {
