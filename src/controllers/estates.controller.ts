@@ -6,7 +6,7 @@ export class EstatesController {
         let searchQuery = req.body.searchQuery;
 
         Estate.find(
-            { 'title': { $regex: searchQuery } },
+            { 'title': { $regex: searchQuery }, 'approved': true },
             (err, estates) => {
                 if (err) console.log(err);
                 else {
@@ -20,7 +20,7 @@ export class EstatesController {
         let cityQuery = req.body.cityQuery;
 
         Estate.find(
-            { 'city': { $regex: cityQuery } },
+            { 'city': { $regex: cityQuery }, 'approved': true },
             (err, estates) => {
                 if (err) console.log(err);
                 else {
@@ -37,7 +37,7 @@ export class EstatesController {
 
         if (rentOrSale == 'sale') {
             Estate.find(
-                { 'rentOrSale': 'sale', 'priceToBuy': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
+                { 'rentOrSale': 'sale', 'priceToBuy': { $gte: priceLowerLimit, $lte: priceHigherLimit }, 'approved': true },
                 (err, estates) => {
                     if (err) console.log(err);
                     else {
@@ -47,7 +47,7 @@ export class EstatesController {
             )
         } else {
             Estate.find(
-                { 'rentOrSale': 'rent', 'priceToRent': { $gte: priceLowerLimit, $lte: priceHigherLimit } },
+                { 'rentOrSale': 'rent', 'priceToRent': { $gte: priceLowerLimit, $lte: priceHigherLimit }, 'approved': true },
                 (err, estates) => {
                     if (err) console.log(err);
                     else {
@@ -73,7 +73,7 @@ export class EstatesController {
     }
 
     getPromotedEstates = (req: express.Request, res: express.Response) => {
-        Estate.find({ 'promoted': true },
+        Estate.find({ 'promoted': true, 'approved': true },
             (err, estates) => {
                 if (err) console.log(err);
                 else {

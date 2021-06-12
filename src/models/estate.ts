@@ -73,6 +73,11 @@ let Estate = new Schema(
             type: Boolean,
             required: true,
             default: false
+        },
+        approved: {
+            type: Boolean,
+            required: true,
+            default: false
         }
     }
 )
