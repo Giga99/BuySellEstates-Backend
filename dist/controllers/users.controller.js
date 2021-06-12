@@ -166,6 +166,21 @@ class UsersController {
                 }
             });
         };
+        this.getUserByUsername = (req, res) => {
+            let username = req.body.username;
+            user_1.default.findOne({ 'username': username }, (err, user) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (user) {
+                        res.status(200).json(user);
+                    }
+                    else {
+                        res.status(400).json({ 'message': 'user not found' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.UsersController = UsersController;

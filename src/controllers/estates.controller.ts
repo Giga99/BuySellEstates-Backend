@@ -81,4 +81,99 @@ export class EstatesController {
                 }
             })
     }
+
+    getUserEstates = (req: express.Request, res: express.Response) => {
+        let ownerUsername = req.body.ownerUsername;
+
+        Estate.find({ 'ownerUsername': ownerUsername },
+            (err, estates) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(estates);
+                }
+            })
+    }
+
+    addEstate = (req: express.Request, res: express.Response) => {
+        let estate = new Estate(req.body);
+
+        estate.save().then(() => {
+            res.status(200).json({ 'message': 'estate added' });
+        }).catch((err) => {
+            console.log(err);
+            res.status(400).json({ 'message': err });
+        });
+    }
+
+    updateEstate = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let title = req.body.title;
+        let municipality = req.body.municipality;
+        let city = req.body.city;
+        let address = req.body.address;
+        let priceToBuy = req.body.priceToBuy
+        let priceToRent = req.body.priceToRent;
+        let squareFootage = req.body.squareFootage;
+        let rentOrSale = req.body.rentOrSale;
+        let numberOfFloors = req.body.numberOfFloors;
+        let floorNumber = req.body.floorNumber;
+        let numberOfRooms = req.body.rentOrSale;
+        let furnished = req.body.numberOfFloors;
+
+        Estate.findOne(
+            { 'id': id },
+            (err, estate) => {
+                if (err) console.log(err);
+                else {
+                    if (estate) {
+                        Estate.collection.updateOne({ 'id': id }, { $set: { 
+                            'title': title,
+                            'municipality': municipality,
+                            'city': city,
+                            'address': address,
+                            'priceToBuy': priceToBuy,
+                            'priceToRent': priceToRent,
+                            'squareFootage': squareFootage,
+                            'rentOrSale': rentOrSale,
+                            'numberOfFloors': numberOfFloors,
+                            'floorNumber': floorNumber,
+                            'numberOfRooms': numberOfRooms,
+                            'furnished': furnished
+                        } }).then((block) => {
+                            res.status(200).json({ 'message': 'estate updated' });
+                        }).catch((err) => {
+                            console.log(err);
+                            res.status(400).json({ 'message': err });
+                        });
+                    } else {
+                        res.status(400).json({ 'message': 'estate not found' });
+                    }
+                }
+            }
+        );
+    }
+
+    answerEstateAdding = (req: express.Request, res: express.Response) => {
+        let id = req.body.id
+        let approved = req.body.approved
+
+        Estate.findOne(
+            { 'id': id },
+            (err, estate) => {
+                if (err) console.log(err);
+                else {
+                    if (estate) {
+                        Estate.collection.updateOne({ 'id': id }, { $set: { 'approved': approved, 'reviewed': true } }).then((block) => {
+                            res.status(200).json({ 'message': 'estate updated' });
+                        }).catch((err) => {
+                            console.log(err);
+                            res.status(400).json({ 'message': err });
+                        });
+                    } else {
+                        res.status(400).json({ 'message': 'estate not found' });
+                    }
+                }
+            }
+        );
+    }
 }

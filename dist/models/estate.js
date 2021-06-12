@@ -75,6 +75,16 @@ let Estate = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    reviewed: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    approved: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 exports.default = mongoose_1.default.model('Estate', Estate, 'estates');

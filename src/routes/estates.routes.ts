@@ -22,4 +22,20 @@ estatesRouter.route('/getPromotedEstates').get(
     (req, res) => new EstatesController().getPromotedEstates(req, res)
 );
 
+estatesRouter.route('/getUserEstates').post(
+    (req, res) => new EstatesController().getUserEstates(req, res)
+);
+
+estatesRouter.route('/addEstate').post(
+    (req, res) => new EstatesController().addEstate(req, res)
+);
+
+estatesRouter.route('/updateEstate').post(
+    (req, res) => new EstatesController().updateEstate(req, res)
+);
+
+estatesRouter.route('/answerEstateAdding').post(
+    (req, res) => new EstatesController().answerEstateAdding(req, res)
+);
+
 export default estatesRouter;

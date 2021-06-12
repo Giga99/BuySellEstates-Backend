@@ -20,7 +20,7 @@ connection.once('open', () => {
 const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/estates', estatesRouter);
-router.use('/users', usersRouter)
+router.use('/users', usersRouter);
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

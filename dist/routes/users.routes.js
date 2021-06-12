@@ -12,5 +12,6 @@ usersRouter.route('/updateUserEmail').post((req, res) => new users_controller_1.
 usersRouter.route('/answerUserRegistration').post((req, res) => new users_controller_1.UsersController().answerUserRegistration(req, res));
 usersRouter.route('/deleteUser').delete((req, res) => new users_controller_1.UsersController().deleteUser(req, res));
 usersRouter.route('/blockUnblockUser').post((req, res) => new users_controller_1.UsersController().blockUnblockUser(req, res));
+usersRouter.route('/getUserByUsername').post((req, res) => new users_controller_1.UsersController().getUserByUsername(req, res));
 exports.default = usersRouter;
 //# sourceMappingURL=users.routes.js.map

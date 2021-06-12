@@ -23,10 +23,6 @@ let User = new Schema({
         type: String,
         required: true
     },
-    profileImage: {
-        type: String,
-        required: false
-    },
     email: {
         type: String,
         unique: true,
