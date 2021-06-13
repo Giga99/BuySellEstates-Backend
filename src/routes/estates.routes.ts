@@ -30,8 +30,8 @@ estatesRouter.route('/addEstate').post(
     (req, res) => new EstatesController().addEstate(req, res)
 );
 
-estatesRouter.route('/updateEstate').post(
-    (req, res) => new EstatesController().updateEstate(req, res)
+estatesRouter.route('/editEstate').post(
+    (req, res) => new EstatesController().editEstate(req, res)
 );
 
 estatesRouter.route('/answerEstateAdding').post(

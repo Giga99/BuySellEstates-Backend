@@ -111,7 +111,7 @@ export class EstatesController {
         })
     }
 
-    updateEstate = (req: express.Request, res: express.Response) => {
+    editEstate = (req: express.Request, res: express.Response) => {
         let id = req.body.id;
         let title = req.body.title;
         let municipality = req.body.municipality;
@@ -123,34 +123,32 @@ export class EstatesController {
         let rentOrSale = req.body.rentOrSale;
         let numberOfFloors = req.body.numberOfFloors;
         let floorNumber = req.body.floorNumber;
-        let numberOfRooms = req.body.rentOrSale;
-        let furnished = req.body.numberOfFloors;
+        let numberOfRooms = req.body.numberOfRooms;
+        let furnished = req.body.furnished;
 
-        Estate.findOne(
+        Estate.findOneAndUpdate(
             { 'id': id },
+            {
+                $set: {
+                    'title': title,
+                    'municipality': municipality,
+                    'city': city,
+                    'address': address,
+                    'priceToBuy': priceToBuy,
+                    'priceToRent': priceToRent,
+                    'squareFootage': squareFootage,
+                    'rentOrSale': rentOrSale,
+                    'numberOfFloors': numberOfFloors,
+                    'floorNumber': floorNumber,
+                    'numberOfRooms': numberOfRooms,
+                    'furnished': furnished
+                }
+            },
             (err, estate) => {
                 if (err) console.log(err);
                 else {
                     if (estate) {
-                        Estate.collection.updateOne({ 'id': id }, { $set: { 
-                            'title': title,
-                            'municipality': municipality,
-                            'city': city,
-                            'address': address,
-                            'priceToBuy': priceToBuy,
-                            'priceToRent': priceToRent,
-                            'squareFootage': squareFootage,
-                            'rentOrSale': rentOrSale,
-                            'numberOfFloors': numberOfFloors,
-                            'floorNumber': floorNumber,
-                            'numberOfRooms': numberOfRooms,
-                            'furnished': furnished
-                        } }).then((block) => {
-                            res.status(200).json({ 'message': 'estate updated' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
+                        res.status(200).json({ 'message': 'estate updated' });
                     } else {
                         res.status(400).json({ 'message': 'estate not found' });
                     }

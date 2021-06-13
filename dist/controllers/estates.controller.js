@@ -80,17 +80,24 @@ class EstatesController {
             });
         };
         this.addEstate = (req, res) => {
-            let estate = new estate_1.default(req.body);
-            estate['id'] = 8;
-            estate.save().then(() => {
-                res.status(200).json({ 'message': 'estate added' });
-            }).catch((err) => {
-                console.log(err);
-                res.status(400).json({ 'message': err });
+            estate_1.default.find({}, (err, etates) => {
+                if (err)
+                    console.log(err);
+                else {
+                    let id = etates.length + 1;
+                    let estate = new estate_1.default(req.body);
+                    estate.id = id;
+                    estate.save().then(() => {
+                        res.status(200).json({ 'message': 'estate added' });
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(400).json({ 'message': err });
+                    });
+                }
             });
         };
-        this.updateEstate = (req, res) => {
-            let id = req.body.id;
+        this.editEstate = (req, res) => {
+            let id = 1241;
             let title = req.body.title;
             let municipality = req.body.municipality;
             let city = req.body.city;
@@ -101,32 +108,52 @@ class EstatesController {
             let rentOrSale = req.body.rentOrSale;
             let numberOfFloors = req.body.numberOfFloors;
             let floorNumber = req.body.floorNumber;
-            let numberOfRooms = req.body.rentOrSale;
-            let furnished = req.body.numberOfFloors;
-            estate_1.default.findOne({ 'id': id }, (err, estate) => {
+            let numberOfRooms = req.body.numberOfRooms;
+            let furnished = req.body.furnished;
+            estate_1.default.findOneAndUpdate({ 'id': id }, {
+                $set: {
+                    'title': title,
+                    'municipality': municipality,
+                    'city': city,
+                    'address': address,
+                    'priceToBuy': priceToBuy,
+                    'priceToRent': priceToRent,
+                    'squareFootage': squareFootage,
+                    'rentOrSale': rentOrSale,
+                    'numberOfFloors': numberOfFloors,
+                    'floorNumber': floorNumber,
+                    'numberOfRooms': numberOfRooms,
+                    'furnished': furnished
+                }
+            }, (err, estate) => {
                 if (err)
                     console.log(err);
                 else {
                     if (estate) {
-                        estate_1.default.collection.updateOne({ 'id': id }, { $set: {
-                                'title': title,
-                                'municipality': municipality,
-                                'city': city,
-                                'address': address,
-                                'priceToBuy': priceToBuy,
-                                'priceToRent': priceToRent,
-                                'squareFootage': squareFootage,
-                                'rentOrSale': rentOrSale,
-                                'numberOfFloors': numberOfFloors,
-                                'floorNumber': floorNumber,
-                                'numberOfRooms': numberOfRooms,
-                                'furnished': furnished
-                            } }).then((block) => {
-                            res.status(200).json({ 'message': 'estate updated' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
+                        // Estate.collection.updateOne(
+                        //     { 'id': id },
+                        //     {
+                        //         $set: {
+                        //             'title': title,
+                        //             'municipality': municipality,
+                        //             'city': city,
+                        //             'address': address,
+                        //             'priceToBuy': priceToBuy,
+                        //             'priceToRent': priceToRent,
+                        //             'squareFootage': squareFootage,
+                        //             'rentOrSale': rentOrSale,
+                        //             'numberOfFloors': numberOfFloors,
+                        //             'floorNumber': floorNumber,
+                        //             'numberOfRooms': numberOfRooms,
+                        //             'furnished': furnished
+                        //         }
+                        //     }).then(() => {
+                        console.log(estate);
+                        res.status(200).json({ 'message': 'estate updated' });
+                        // }).catch((err) => {
+                        //     console.log(err);
+                        //     res.status(400).json({ 'message': err });
+                        // });
                     }
                     else {
                         res.status(400).json({ 'message': 'estate not found' });

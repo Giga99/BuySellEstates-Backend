@@ -108,18 +108,14 @@ export class UsersController {
         let username = req.body.username
         let accepted = req.body.accepted
 
-        User.findOne(
+        User.findOneAndUpdate(
             { 'username': username },
+            { $set: { 'accepted': accepted, 'reviewed': true } },
             (err, user) => {
                 if (err) console.log(err);
                 else {
                     if (user) {
-                        User.collection.updateOne({ 'username': username }, { $set: { 'accepted': accepted, 'reviewed': true } }).then((block) => {
-                            res.status(200).json({ 'message': 'user updated' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
+                        res.status(200).json({ 'message': 'user updated' });
                     } else {
                         res.status(400).json({ 'message': 'user not found' });
                     }
@@ -187,7 +183,7 @@ export class UsersController {
         User.findOne(
             { 'username': username },
             (err, user) => {
-                if(err) console.log(err)
+                if (err) console.log(err)
                 else {
                     if (user) {
                         res.status(200).json(user);
