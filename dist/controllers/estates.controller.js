@@ -97,7 +97,7 @@ class EstatesController {
             });
         };
         this.editEstate = (req, res) => {
-            let id = 1241;
+            let id = req.body.id;
             let title = req.body.title;
             let municipality = req.body.municipality;
             let city = req.body.city;
@@ -130,30 +130,7 @@ class EstatesController {
                     console.log(err);
                 else {
                     if (estate) {
-                        // Estate.collection.updateOne(
-                        //     { 'id': id },
-                        //     {
-                        //         $set: {
-                        //             'title': title,
-                        //             'municipality': municipality,
-                        //             'city': city,
-                        //             'address': address,
-                        //             'priceToBuy': priceToBuy,
-                        //             'priceToRent': priceToRent,
-                        //             'squareFootage': squareFootage,
-                        //             'rentOrSale': rentOrSale,
-                        //             'numberOfFloors': numberOfFloors,
-                        //             'floorNumber': floorNumber,
-                        //             'numberOfRooms': numberOfRooms,
-                        //             'furnished': furnished
-                        //         }
-                        //     }).then(() => {
-                        console.log(estate);
                         res.status(200).json({ 'message': 'estate updated' });
-                        // }).catch((err) => {
-                        //     console.log(err);
-                        //     res.status(400).json({ 'message': err });
-                        // });
                     }
                     else {
                         res.status(400).json({ 'message': 'estate not found' });

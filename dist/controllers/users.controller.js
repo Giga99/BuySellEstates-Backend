@@ -101,17 +101,12 @@ class UsersController {
         this.answerUserRegistration = (req, res) => {
             let username = req.body.username;
             let accepted = req.body.accepted;
-            user_1.default.findOne({ 'username': username }, (err, user) => {
+            user_1.default.findOneAndUpdate({ 'username': username }, { $set: { 'accepted': accepted, 'reviewed': true } }, (err, user) => {
                 if (err)
                     console.log(err);
                 else {
                     if (user) {
-                        user_1.default.collection.updateOne({ 'username': username }, { $set: { 'accepted': accepted, 'reviewed': true } }).then((block) => {
-                            res.status(200).json({ 'message': 'user updated' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
+                        res.status(200).json({ 'message': 'user updated' });
                     }
                     else {
                         res.status(400).json({ 'message': 'user not found' });
