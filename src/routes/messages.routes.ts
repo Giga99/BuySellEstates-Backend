@@ -1,0 +1,17 @@
+import express from 'express';
+import { MessagesController } from '../controllers/messages.controller';
+const messagesRouter = express.Router();
+
+messagesRouter.route('/getAllThreadsForUser').post(
+    (req, res) => new MessagesController().getAllThreadsForUser(req, res)
+);
+
+messagesRouter.route('/startThread').post(
+    (req, res) => new MessagesController().startThread(req, res)
+);
+
+messagesRouter.route('/sendMessageOffer').post(
+    (req, res) => new MessagesController().sendMessageOffer(req, res)
+);
+
+export default messagesRouter;

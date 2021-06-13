@@ -9,8 +9,7 @@ let Estate = new Schema({
     id: {
         type: Number,
         unique: true,
-        required: true,
-        auto: true
+        required: true
     },
     title: {
         type: String,
