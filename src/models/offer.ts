@@ -36,7 +36,7 @@ let Offer = new Schema(
             type: Boolean,
             default: false,
             required: true
-        },
+        }
     }
 )
 
