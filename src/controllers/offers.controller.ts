@@ -89,7 +89,7 @@ export class OffersController {
         );
     }
 
-    checkForActiveOffer = (req: express.Request, res: express.Response) => {
+    isOfferActive = (req: express.Request, res: express.Response) => {
         let offerId = req.body.offerId;
 
         Offer.findOne(
