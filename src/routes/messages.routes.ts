@@ -14,4 +14,12 @@ messagesRouter.route('/sendMessageOffer').post(
     (req, res) => new MessagesController().sendMessageOffer(req, res)
 );
 
+messagesRouter.route('/getThreadById').post(
+    (req, res) => new MessagesController().getThreadById(req, res)
+);
+
+messagesRouter.route('/readMessage').post(
+    (req, res) => new MessagesController().readMessage(req, res)
+);
+
 export default messagesRouter;

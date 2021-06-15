@@ -83,4 +83,34 @@ export class MessagesController {
             }
         );
     }
+
+    getThreadById = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        Thread.findOne(
+            { 'id': id },
+            (err, thread) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(thread);
+                }
+            }
+        );
+    }
+
+    readMessage = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        Thread.findOneAndUpdate(
+            { 'id': id },
+            { 'read': true },
+            { new: true },
+            (err, thread) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'poruka procitana' });
+                }
+            }
+        );
+    }
 }

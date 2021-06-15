@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OffersController = void 0;
+const estate_1 = __importDefault(require("../models/estate"));
 const offer_1 = __importDefault(require("../models/offer"));
 class OffersController {
     constructor() {
@@ -41,15 +42,55 @@ class OffersController {
         this.answerEstateOffer = (req, res) => {
             let id = req.body.id;
             let accepted = req.body.accepted;
-            offer_1.default.findOneAndUpdate({ 'id': id }, { $set: { 'acceptedByOwner': accepted, 'reviewedByOwner': true } }, (err, offer) => {
+            let estateId = req.body.estateId;
+            offer_1.default.findOneAndUpdate({ 'id': id }, { $set: { 'acceptedByOwner': accepted, 'reviewedByOwner': true } }, { new: true }, (err, offer) => {
                 if (err)
                     console.log(err);
                 else {
                     if (offer) {
-                        res.status(200).json({ 'message': 'offer answered' });
+                        if (accepted == true) {
+                            estate_1.default.findOne({ 'id': estateId }, (err, estate) => {
+                                if (err)
+                                    console.log(err);
+                                else {
+                                    if (estate.get('rentOrSale') == 'sale') {
+                                        offer_1.default.updateMany({ 'estateId': estateId, 'reviewedByOwner': false }, { 'acceptedByOwner': false, 'reviewedByOwner': true }).then(() => {
+                                            res.status(200).json({ 'message': 'offer answered' });
+                                        }).catch((err) => {
+                                            res.status(400).json({ 'message': err });
+                                        });
+                                    }
+                                    else {
+                                        offer_1.default.updateMany({ 'estateId': estateId, 'reviewedByOwner': false, $or: [{ 'dateFrom': { $gte: offer.get('dateFrom'), $lte: offer.get('dateTo') } }, { 'dateTo': { $gte: offer.get('dateFrom'), $lte: offer.get('dateTo') } }] }, { 'acceptedByOwner': false, 'reviewedByOwner': true }).then(() => {
+                                            res.status(200).json({ 'message': 'offer answered' });
+                                        }).catch((err) => {
+                                            res.status(400).json({ 'message': err });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            res.status(200).json({ 'message': 'offer answered' });
+                        }
                     }
                     else {
                         res.status(400).json({ 'message': 'offer not found' });
+                    }
+                }
+            });
+        };
+        this.checkForActiveOffer = (req, res) => {
+            let offerId = req.body.offerId;
+            offer_1.default.findOne({ 'id': offerId, 'reviewedByOwner': false }, (err, offer) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (offer) {
+                        res.status(200).json({ 'message': 'active offer exists' });
+                    }
+                    else {
+                        res.status(200).json({ 'message': 'active offer doesnt exist' });
                     }
                 }
             });

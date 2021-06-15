@@ -15,7 +15,7 @@ const messages_routes_1 = __importDefault(require("./routes/messages.routes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
-mongoose_1.default.connect('mongodb://localhost:27017/estatesdb');
+mongoose_1.default.connect('mongodb://localhost:27017/estatesdb', { useNewUrlParser: true });
 const connection = mongoose_1.default.connection;
 connection.once('open', () => {
     console.log('mongo ok');

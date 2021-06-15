@@ -14,4 +14,8 @@ offersRouter.route('/answerEstateOffer').post(
     (req, res) => new OffersController().answerEstateOffer(req, res)
 );
 
+offersRouter.route('/checkForActiveOffer').post(
+    (req, res) => new OffersController().checkForActiveOffer(req, res)
+);
+
 export default offersRouter;

@@ -82,6 +82,26 @@ class MessagesController {
                 }
             });
         };
+        this.getThreadById = (req, res) => {
+            let id = req.body.id;
+            thread_1.default.findOne({ 'id': id }, (err, thread) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json(thread);
+                }
+            });
+        };
+        this.readMessage = (req, res) => {
+            let id = req.body.id;
+            thread_1.default.findOneAndUpdate({ 'id': id }, { 'read': true }, { new: true }, (err, thread) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'poruka procitana' });
+                }
+            });
+        };
     }
 }
 exports.MessagesController = MessagesController;
