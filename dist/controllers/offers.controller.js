@@ -80,7 +80,7 @@ class OffersController {
                 }
             });
         };
-        this.checkForActiveOffer = (req, res) => {
+        this.isOfferActive = (req, res) => {
             let offerId = req.body.offerId;
             offer_1.default.findOne({ 'id': offerId, 'reviewedByOwner': false }, (err, offer) => {
                 if (err)

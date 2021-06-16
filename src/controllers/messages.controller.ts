@@ -7,7 +7,7 @@ export class MessagesController {
         let username = req.body.username;
 
         Thread.find({ $or: [{ 'user1': username }, { 'user2': username }] })
-            .sort({ lastMessageDate: 1 }).then((estates) => {
+            .sort({ lastMessageDate: -1 }).then((estates) => {
                 res.status(200).json(estates);
             }).catch((err) => {
                 console.log(err);
