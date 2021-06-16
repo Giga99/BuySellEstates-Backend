@@ -42,4 +42,8 @@ estatesRouter.route('/getAddedEstates').get(
     (req, res) => new EstatesController().getAddedEstates(req, res)
 );
 
+estatesRouter.route('/togglePromotedEstate').post(
+    (req, res) => new EstatesController().togglePromotedEstate(req, res)
+);
+
 export default estatesRouter;
