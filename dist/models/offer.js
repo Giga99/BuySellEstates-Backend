@@ -38,6 +38,16 @@ let Offer = new Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    reviewedByAgent: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    acceptedByAgent: {
+        type: Boolean,
+        default: false,
+        required: true
     }
 });
 exports.default = mongoose_1.default.model('Offer', Offer, 'offers');

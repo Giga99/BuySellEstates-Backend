@@ -38,4 +38,8 @@ estatesRouter.route('/answerEstateAdding').post(
     (req, res) => new EstatesController().answerEstateAdding(req, res)
 );
 
+estatesRouter.route('/getAddedEstates').get(
+    (req, res) => new EstatesController().getAddedEstates(req, res)
+);
+
 export default estatesRouter;

@@ -180,4 +180,32 @@ export class EstatesController {
             }
         );
     }
+
+    getAddedEstates = (req: express.Request, res: express.Response) => {
+        Estate.find(
+            { 'reviewed': false },
+            (err, estates) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(estates);
+                }
+            }
+        )
+    }
+
+    togglePromotedEstate = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let promoted = req.body.promoted;
+
+        Estate.findOneAndUpdate(
+            { 'id': id },
+            { 'promoted': promoted },
+            (err, estate) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'uspesno promenjena promocija nekretnine' });
+                }
+            }
+        );
+    }
 }

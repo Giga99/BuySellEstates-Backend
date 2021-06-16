@@ -89,6 +89,58 @@ export class OffersController {
         );
     }
 
+    answerEstateOfferAgent = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let accepted = req.body.accepted;
+        let estateId = req.body.estateId;
+
+        Offer.findOneAndUpdate(
+            { 'id': id },
+            { $set: { 'acceptedByOwner': accepted, 'reviewedByOwner': true, 'acceptedByAgent': accepted, 'reviewedByAgent': true } },
+            { new: true },
+            (err, offer) => {
+                if (err) console.log(err);
+                else {
+                    if (offer) {
+                        if (accepted == true) {
+                            Estate.findOne(
+                                { 'id': estateId },
+                                (err, estate) => {
+                                    if(err) console.log(err);
+                                    else {
+                                        if (estate.get('rentOrSale') == 'sale') {
+                                            Offer.updateMany(
+                                                { 'estateId': estateId, 'reviewedByOwner': false },
+                                                { 'acceptedByOwner': false, 'reviewedByOwner': true }
+                                            ).then(() => {
+                                                res.status(200).json({ 'message': 'offer answered' });
+                                            }).catch((err) => {
+                                                res.status(400).json({ 'message': err });
+                                            });
+                                        } else {
+                                            Offer.updateMany(
+                                                { 'estateId': estateId, 'reviewedByOwner': false, $or: [{ 'dateFrom': { $gte: offer.get('dateFrom'), $lte: offer.get('dateTo') } }, { 'dateTo': { $gte: offer.get('dateFrom'), $lte: offer.get('dateTo') } }] },
+                                                { 'acceptedByOwner': false, 'reviewedByOwner': true }
+                                            ).then(() => {
+                                                res.status(200).json({ 'message': 'offer answered' });
+                                            }).catch((err) => {
+                                                res.status(400).json({ 'message': err });
+                                            });
+                                        }
+                                    }
+                                }
+                            );
+                        } else {
+                            res.status(200).json({ 'message': 'offer answered' });
+                        }
+                    } else {
+                        res.status(400).json({ 'message': 'offer not found' });
+                    }
+                }
+            }
+        );
+    }
+
     isOfferActive = (req: express.Request, res: express.Response) => {
         let offerId = req.body.offerId;
 

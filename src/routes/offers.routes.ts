@@ -14,6 +14,10 @@ offersRouter.route('/answerEstateOffer').post(
     (req, res) => new OffersController().answerEstateOffer(req, res)
 );
 
+offersRouter.route('/answerEstateOfferAgent').post(
+    (req, res) => new OffersController().answerEstateOfferAgent(req, res)
+);
+
 offersRouter.route('/isOfferActive').post(
     (req, res) => new OffersController().isOfferActive(req, res)
 );
