@@ -13,5 +13,7 @@ offersRouter.route('/answerEstateOfferAgent').post((req, res) => new offers_cont
 offersRouter.route('/isOfferActive').post((req, res) => new offers_controller_1.OffersController().isOfferActive(req, res));
 offersRouter.route('/getAllAgreedOffers').get((req, res) => new offers_controller_1.OffersController().getAllAgreedOffers(req, res));
 offersRouter.route('/getAllAgencyAgreedOffers').post((req, res) => new offers_controller_1.OffersController().getAllAgencyAgreedOffers(req, res));
+offersRouter.route('/getAllOffersRequests').get((req, res) => new offers_controller_1.OffersController().getAllOffersRequests(req, res));
+offersRouter.route('/answerOfferRequest').post((req, res) => new offers_controller_1.OffersController().answerOfferRequest(req, res));
 exports.default = offersRouter;
 //# sourceMappingURL=offers.routes.js.map

@@ -141,21 +141,8 @@ class OffersController {
                 if (err)
                     console.log(err);
                 else {
-                    // console.log(offers);
                     let buys = offers.filter((offer) => {
-                        // console.log("filter");
                         return offer.get('dateFrom') == '-1';
-                        // Estate.findOne(
-                        //     { 'id': offer.get('estateId') },
-                        //     (err, estate) => {
-                        //         if (err) console.log(err);
-                        //         else {
-                        //             if (estate) {
-                        //                 if (estate.get('rentOrSale') == 'sale') buys.push(offer);
-                        //             }
-                        //         }
-                        //     }
-                        // )
                     });
                     res.status(200).json(buys);
                 }
@@ -168,6 +155,27 @@ class OffersController {
                     console.log(err);
                 else {
                     res.status(200).json(offers);
+                }
+            });
+        };
+        this.getAllOffersRequests = (req, res) => {
+            offer_1.default.find({ 'acceptedByOwner': true, 'reviewedByAgent': false }, (err, offers) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json(offers);
+                }
+            });
+        };
+        this.answerOfferRequest = (req, res) => {
+            let id = req.body.id;
+            let accepted = req.body.accepted;
+            offer_1.default.findOneAndUpdate({ 'id': id, 'reviewedByAgent': false, 'acceptedByOwner': true }, { 'reviewedByAgent': true, 'acceptedByAgent': accepted }, { new: true }, (err, offer) => {
+                console.log(offer);
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'offer request answered' });
                 }
             });
         };

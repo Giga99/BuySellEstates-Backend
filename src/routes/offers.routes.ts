@@ -30,4 +30,12 @@ offersRouter.route('/getAllAgencyAgreedOffers').post(
     (req, res) => new OffersController().getAllAgencyAgreedOffers(req, res)
 );
 
+offersRouter.route('/getAllOffersRequests').get(
+    (req, res) => new OffersController().getAllOffersRequests(req, res)
+);
+
+offersRouter.route('/answerOfferRequest').post(
+    (req, res) => new OffersController().answerOfferRequest(req, res)
+);
+
 export default offersRouter;

@@ -189,4 +189,33 @@ export class OffersController {
             }
         );
     }
+
+    getAllOffersRequests = (req: express.Request, res: express.Response) => {
+        Offer.find(
+            { 'acceptedByOwner': true, 'reviewedByAgent': false },
+            (err, offers) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(offers);
+                }
+            }
+        );
+    }
+
+    answerOfferRequest = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let accepted = req.body.accepted;
+
+        Offer.findOneAndUpdate(
+            { 'id': id, 'reviewedByAgent': false, 'acceptedByOwner': true },
+            { 'reviewedByAgent': true, 'acceptedByAgent': accepted },
+            { new: true },
+            (err, offer) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'offer request answered' });
+                }
+            }
+        )
+    }
 }
