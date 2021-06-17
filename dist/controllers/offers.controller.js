@@ -136,6 +136,41 @@ class OffersController {
                 }
             });
         };
+        this.getAllAgreedOffers = (req, res) => {
+            offer_1.default.find({ 'acceptedByOwner': true, 'acceptedByAgent': true }, (err, offers) => {
+                if (err)
+                    console.log(err);
+                else {
+                    // console.log(offers);
+                    let buys = offers.filter((offer) => {
+                        // console.log("filter");
+                        return offer.get('dateFrom') == '-1';
+                        // Estate.findOne(
+                        //     { 'id': offer.get('estateId') },
+                        //     (err, estate) => {
+                        //         if (err) console.log(err);
+                        //         else {
+                        //             if (estate) {
+                        //                 if (estate.get('rentOrSale') == 'sale') buys.push(offer);
+                        //             }
+                        //         }
+                        //     }
+                        // )
+                    });
+                    res.status(200).json(buys);
+                }
+            });
+        };
+        this.getAllAgencyAgreedOffers = (req, res) => {
+            let agency = req.body.agency;
+            offer_1.default.find({ 'acceptedByOwner': true, 'acceptedByAgent': true, 'estateOwner': agency }, (err, offers) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json(offers);
+                }
+            });
+        };
     }
 }
 exports.OffersController = OffersController;

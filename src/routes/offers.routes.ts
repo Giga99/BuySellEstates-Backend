@@ -22,4 +22,12 @@ offersRouter.route('/isOfferActive').post(
     (req, res) => new OffersController().isOfferActive(req, res)
 );
 
+offersRouter.route('/getAllAgreedOffers').get(
+    (req, res) => new OffersController().getAllAgreedOffers(req, res)
+);
+
+offersRouter.route('/getAllAgencyAgreedOffers').post(
+    (req, res) => new OffersController().getAllAgencyAgreedOffers(req, res)
+);
+
 export default offersRouter;

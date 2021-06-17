@@ -11,5 +11,7 @@ offersRouter.route('/sendOffer').post((req, res) => new offers_controller_1.Offe
 offersRouter.route('/answerEstateOffer').post((req, res) => new offers_controller_1.OffersController().answerEstateOffer(req, res));
 offersRouter.route('/answerEstateOfferAgent').post((req, res) => new offers_controller_1.OffersController().answerEstateOfferAgent(req, res));
 offersRouter.route('/isOfferActive').post((req, res) => new offers_controller_1.OffersController().isOfferActive(req, res));
+offersRouter.route('/getAllAgreedOffers').get((req, res) => new offers_controller_1.OffersController().getAllAgreedOffers(req, res));
+offersRouter.route('/getAllAgencyAgreedOffers').post((req, res) => new offers_controller_1.OffersController().getAllAgencyAgreedOffers(req, res));
 exports.default = offersRouter;
 //# sourceMappingURL=offers.routes.js.map

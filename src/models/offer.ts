@@ -13,6 +13,10 @@ let Offer = new Schema(
             type: Number,
             required: true
         },
+        estateName: {
+            type: String,
+            required: true
+        },
         estateOwner: {
             type: String,
             required: true
@@ -26,6 +30,10 @@ let Offer = new Schema(
         },
         dateTo: {
             type: String
+        },
+        priceToPay: {
+            type: Number,
+            required: true,
         },
         reviewedByOwner: {
             type: Boolean,

@@ -1,4 +1,5 @@
 import express from 'express';
+import { Document } from 'mongoose';
 import Estate from '../models/estate';
 import Offer from '../models/offer';
 
@@ -54,7 +55,7 @@ export class OffersController {
                             Estate.findOne(
                                 { 'id': estateId },
                                 (err, estate) => {
-                                    if(err) console.log(err);
+                                    if (err) console.log(err);
                                     else {
                                         if (estate.get('rentOrSale') == 'sale') {
                                             Offer.updateMany(
@@ -106,7 +107,7 @@ export class OffersController {
                             Estate.findOne(
                                 { 'id': estateId },
                                 (err, estate) => {
-                                    if(err) console.log(err);
+                                    if (err) console.log(err);
                                     else {
                                         if (estate.get('rentOrSale') == 'sale') {
                                             Offer.updateMany(
@@ -157,5 +158,35 @@ export class OffersController {
                 }
             }
         )
+    }
+
+    getAllAgreedOffers = (req: express.Request, res: express.Response) => {
+        Offer.find(
+            { 'acceptedByOwner': true, 'acceptedByAgent': true },
+            (err, offers) => {
+                if (err) console.log(err);
+                else {
+                    let buys = offers.filter((offer) => {
+                        return offer.get('dateFrom') == '-1';
+                    });
+
+                    res.status(200).json(buys);
+                }
+            }
+        );
+    }
+
+    getAllAgencyAgreedOffers = (req: express.Request, res: express.Response) => {
+        let agency = req.body.agency;
+
+        Offer.find(
+            { 'acceptedByOwner': true, 'acceptedByAgent': true, 'estateOwner': agency },
+            (err, offers) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(offers);
+                }
+            }
+        );
     }
 }
