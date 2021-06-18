@@ -194,4 +194,28 @@ export class UsersController {
             }
         )
     }
+
+    getRegistrationRequests = (req: express.Request, res: express.Response) => {
+        User.find(
+            { 'reviewed': false },
+            (err, users) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(users);
+                }
+            }
+        );
+    }
+
+    getAllUsers = (req: express.Request, res: express.Response) => {
+        User.find(
+            { 'accepted': true },
+            (err, users) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json(users);
+                }
+            }
+        );
+    }
 }

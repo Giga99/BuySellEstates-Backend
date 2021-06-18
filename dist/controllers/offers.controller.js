@@ -171,7 +171,6 @@ class OffersController {
             let id = req.body.id;
             let accepted = req.body.accepted;
             offer_1.default.findOneAndUpdate({ 'id': id, 'reviewedByAgent': false, 'acceptedByOwner': true }, { 'reviewedByAgent': true, 'acceptedByAgent': accepted }, { new: true }, (err, offer) => {
-                console.log(offer);
                 if (err)
                     console.log(err);
                 else {

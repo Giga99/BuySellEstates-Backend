@@ -176,6 +176,24 @@ class UsersController {
                 }
             });
         };
+        this.getRegistrationRequests = (req, res) => {
+            user_1.default.find({ 'reviewed': false }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json(users);
+                }
+            });
+        };
+        this.getAllUsers = (req, res) => {
+            user_1.default.find({ 'accepted': true }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json(users);
+                }
+            });
+        };
     }
 }
 exports.UsersController = UsersController;
