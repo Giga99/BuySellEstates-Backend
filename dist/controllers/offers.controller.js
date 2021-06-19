@@ -141,10 +141,7 @@ class OffersController {
                 if (err)
                     console.log(err);
                 else {
-                    let buys = offers.filter((offer) => {
-                        return offer.get('dateFrom') == '-1';
-                    });
-                    res.status(200).json(buys);
+                    res.status(200).json(offers);
                 }
             });
         };

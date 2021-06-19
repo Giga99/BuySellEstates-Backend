@@ -14,7 +14,7 @@ let Fee = new Schema(
             required: true
         },
         saleFee: {
-            type: String,
+            type: Number,
             required: true
         }
     }
