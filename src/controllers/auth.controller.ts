@@ -18,13 +18,31 @@ export class AuthController {
 
     register = (req: express.Request, res: express.Response) => {
         let user = new User(req.body);
-        
-        user.save().then((user) => {
-            res.status(200).json({ 'message': 'user added' });
-        }).catch((err) => {
-            console.log(err);
-            res.status(400).json({ 'message': err });
-        });
+
+        User.find(
+            { 'username': req.body.username },
+            (err, users) => {
+                if (users.length == 0) {
+                    User.find(
+                        { 'email': req.body.email },
+                        (err, users) => {
+                            if (users.length == 0) {
+                                user.save().then((user) => {
+                                    res.status(200).json({ 'message': 'user added' });
+                                }).catch((err) => {
+                                    console.log(err);
+                                    res.status(200).json({ 'message': err });
+                                });
+                            } else {
+                                res.status(200).json({ 'message': 'email exist' });
+                            }
+                        }
+                    );
+                } else {
+                    res.status(200).json({ 'message': 'username exist' });
+                }
+            }
+        );
     }
 
     changePassword = (req: express.Request, res: express.Response) => {

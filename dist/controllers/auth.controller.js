@@ -20,11 +20,25 @@ class AuthController {
         };
         this.register = (req, res) => {
             let user = new user_1.default(req.body);
-            user.save().then((user) => {
-                res.status(200).json({ 'message': 'user added' });
-            }).catch((err) => {
-                console.log(err);
-                res.status(400).json({ 'message': err });
+            user_1.default.find({ 'username': req.body.username }, (err, users) => {
+                if (users.length == 0) {
+                    user_1.default.find({ 'email': req.body.email }, (err, users) => {
+                        if (users.length == 0) {
+                            user.save().then((user) => {
+                                res.status(200).json({ 'message': 'user added' });
+                            }).catch((err) => {
+                                console.log(err);
+                                res.status(200).json({ 'message': err });
+                            });
+                        }
+                        else {
+                            res.status(200).json({ 'message': 'email exist' });
+                        }
+                    });
+                }
+                else {
+                    res.status(200).json({ 'message': 'username exist' });
+                }
             });
         };
         this.changePassword = (req, res) => {
