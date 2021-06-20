@@ -7,7 +7,7 @@ export class OffersController {
 
     checkEstateAvailability = (req: express.Request, res: express.Response) => {
         Offer.find(
-            { 'estateId': req.body.estateId, 'acceptedByOwner': true, $or: [{ 'dateFrom': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }, { 'dateTo': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }] },
+            { 'estateId': req.body.estateId, 'acceptedByAgent': true, $or: [{ 'dateFrom': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }, { 'dateTo': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }] },
             (err, offers) => {
                 if (err) console.log(err);
                 else {

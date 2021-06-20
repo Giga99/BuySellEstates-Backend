@@ -14,12 +14,13 @@ class UsersController {
             let lastname = req.body.lastname;
             let city = req.body.city;
             let country = req.body.country;
+            let profileImage = req.body.profileImage;
             user_1.default.findOne({ 'username': username }, (err, user) => {
                 if (err)
                     console.log(err);
                 else {
                     if (user) {
-                        user_1.default.collection.updateOne({ 'username': username }, { $set: { 'firstname': firstname, 'lastname': lastname, 'city': city, 'country': country } }).then((block) => {
+                        user_1.default.collection.updateOne({ 'username': username }, { $set: { 'firstname': firstname, 'lastname': lastname, 'city': city, 'country': country, 'profileImage': profileImage } }).then((block) => {
                             res.status(200).json({ 'message': 'user info updated' });
                         }).catch((err) => {
                             console.log(err);
