@@ -3,6 +3,7 @@ import User from '../models/user';
 import Block from '../models/block';
 
 export class UsersController {
+    
     updateUserInfo = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let firstname = req.body.firstname;
