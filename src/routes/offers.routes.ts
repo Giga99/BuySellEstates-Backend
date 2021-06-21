@@ -38,4 +38,8 @@ offersRouter.route('/answerOfferRequest').post(
     (req, res) => new OffersController().answerOfferRequest(req, res)
 );
 
+offersRouter.route('/isEstateSold').post(
+    (req, res) => new OffersController().isEstateSold(req, res)
+);
+
 export default offersRouter;

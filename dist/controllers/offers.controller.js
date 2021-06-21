@@ -175,6 +175,19 @@ class OffersController {
                 }
             });
         };
+        this.isEstateSold = (req, res) => {
+            let estateId = req.body.estateId;
+            offer_1.default.findOne({ 'estateId': estateId, 'dateFrom': '-1', 'acceptedByOwner': true, 'acceptedByAgent': true }, (err, offer) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (offer)
+                        res.status(200).json(true);
+                    else
+                        res.status(200).json(false);
+                }
+            });
+        };
     }
 }
 exports.OffersController = OffersController;

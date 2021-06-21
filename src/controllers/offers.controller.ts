@@ -213,4 +213,19 @@ export class OffersController {
             }
         )
     }
+
+    isEstateSold = (req: express.Request, res: express.Response) => {
+        let estateId = req.body.estateId;
+
+        Offer.findOne(
+            { 'estateId': estateId, 'dateFrom': '-1', 'acceptedByOwner': true, 'acceptedByAgent': true },
+            (err, offer) => {
+                if(err) console.log(err);
+                else {
+                    if(offer) res.status(200).json(true);
+                    else res.status(200).json(false);
+                }
+            }
+        );
+    }
 }
