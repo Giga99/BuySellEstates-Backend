@@ -101,8 +101,8 @@ export class EstatesController {
                 let id = etates.length + 1;
                 let estate = new Estate(req.body);
                 estate.id = id;
-                estate.save().then(() => {
-                    res.status(200).json({ 'message': 'estate added' });
+                estate.save().then((estate) => {
+                    res.status(200).json({ 'message': 'estate added', 'id': id });
                 }).catch((err) => {
                     console.log(err);
                     res.status(400).json({ 'message': err });

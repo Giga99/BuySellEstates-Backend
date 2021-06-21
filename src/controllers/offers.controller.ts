@@ -1,5 +1,4 @@
 import express from 'express';
-import { Document } from 'mongoose';
 import Estate from '../models/estate';
 import Offer from '../models/offer';
 
