@@ -175,7 +175,17 @@ class EstatesController {
                 if (err)
                     console.log(err);
                 else {
-                    res.status(200).json({ 'message': 'uspesno promenjena promocija nekretnine' });
+                    res.status(200).json({ 'message': 'Uspesno promenjena promocija nekretnine' });
+                }
+            });
+        };
+        this.updateViews = (req, res) => {
+            let id = req.body.id;
+            estate_1.default.findOneAndUpdate({ 'id': id }, { $inc: { 'views': 1 } }, (err, estate) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'ok' });
                 }
             });
         };

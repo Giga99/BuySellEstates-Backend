@@ -203,7 +203,22 @@ export class EstatesController {
             (err, estate) => {
                 if (err) console.log(err);
                 else {
-                    res.status(200).json({ 'message': 'uspesno promenjena promocija nekretnine' });
+                    res.status(200).json({ 'message': 'Uspesno promenjena promocija nekretnine' });
+                }
+            }
+        );
+    }
+
+    updateViews = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        Estate.findOneAndUpdate(
+            { 'id': id },
+            { $inc: { 'views': 1 } },
+            (err, estate) => {
+                if (err) console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'ok' });
                 }
             }
         );

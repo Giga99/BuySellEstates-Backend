@@ -17,5 +17,6 @@ estatesRouter.route('/editEstate').post((req, res) => new estates_controller_1.E
 estatesRouter.route('/answerEstateAdding').post((req, res) => new estates_controller_1.EstatesController().answerEstateAdding(req, res));
 estatesRouter.route('/getAddedEstates').get((req, res) => new estates_controller_1.EstatesController().getAddedEstates(req, res));
 estatesRouter.route('/togglePromotedEstate').post((req, res) => new estates_controller_1.EstatesController().togglePromotedEstate(req, res));
+estatesRouter.route('/updateViews').post((req, res) => new estates_controller_1.EstatesController().updateViews(req, res));
 exports.default = estatesRouter;
 //# sourceMappingURL=estates.routes.js.map

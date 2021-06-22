@@ -65,6 +65,11 @@ let Estate = new Schema(
             type: Boolean,
             required: true
         },
+        views: {
+            type: Number,
+            required: true,
+            default: 0
+        },
         gallery: {
             type: Array,
             required: true
