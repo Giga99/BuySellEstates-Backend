@@ -84,6 +84,43 @@ export class MessagesController {
         );
     }
 
+    sendMessage = (req: express.Request, res: express.Response) => {
+        let threadId = req.body.threadId;
+        let text = req.body.text;
+        let sender = req.body.sender;
+        let date = req.body.date;
+
+        Thread.findOneAndUpdate(
+            { 'id': threadId },
+            { $set: { 'read': false, 'lastMessageDate': date } },
+            { new: true },
+            (err, thread) => {
+                if (err) console.log(err);
+                else {
+                    if (thread) {
+                        let message = {
+                            id: thread.get('messages').length + 1,
+                            text: text,
+                            sender: sender,
+                            date: date,
+                            isOffer: false,
+                            dateFrom: "-1",
+                            dateTo: "-1",
+                            offerId: "-1"
+                        }
+                        Thread.updateOne({ 'id': threadId }, { $push: { 'messages': message } }).then(() => {
+                            res.status(200).json({ 'message': 'message sent' });
+                        }).catch((err) => {
+                            res.status(400).json({ 'message': err });
+                        })
+                    } else {
+                        res.status(400).json({ 'message': 'thread not found' });
+                    }
+                }
+            }
+        );
+    }
+
     getThreadById = (req: express.Request, res: express.Response) => {
         let id = req.body.id;
 
