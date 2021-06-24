@@ -12,5 +12,6 @@ messagesRouter.route('/sendMessageOffer').post((req, res) => new messages_contro
 messagesRouter.route('/sendMessage').post((req, res) => new messages_controller_1.MessagesController().sendMessage(req, res));
 messagesRouter.route('/getThreadById').post((req, res) => new messages_controller_1.MessagesController().getThreadById(req, res));
 messagesRouter.route('/readMessage').post((req, res) => new messages_controller_1.MessagesController().readMessage(req, res));
+messagesRouter.route('/toggleArchive').post((req, res) => new messages_controller_1.MessagesController().toggleArchive(req, res));
 exports.default = messagesRouter;
 //# sourceMappingURL=messages.routes.js.map

@@ -134,6 +134,17 @@ class MessagesController {
                 }
             });
         };
+        this.toggleArchive = (req, res) => {
+            let id = req.body.id;
+            let active = req.body.active;
+            thread_1.default.findOneAndUpdate({ 'id': id }, { 'active': active }, (err, thread) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.status(200).json({ 'message': 'thread activity changed' });
+                }
+            });
+        };
     }
 }
 exports.MessagesController = MessagesController;

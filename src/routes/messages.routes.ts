@@ -26,4 +26,8 @@ messagesRouter.route('/readMessage').post(
     (req, res) => new MessagesController().readMessage(req, res)
 );
 
+messagesRouter.route('/toggleArchive').post(
+    (req, res) => new MessagesController().toggleArchive(req, res)
+);
+
 export default messagesRouter;
