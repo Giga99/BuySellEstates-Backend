@@ -9,6 +9,7 @@ import offersRouter from './routes/offers.routes';
 import messagesRouter from './routes/messages.routes';
 import feesRouter from './routes/fees.routes';
 import filesRouter from './routes/files.routes';
+import blocksRouter from './routes/blocks.routes';
 
 const app = express();
 
@@ -29,6 +30,7 @@ router.use('/offers', offersRouter);
 router.use('/messages', messagesRouter);
 router.use('/fees', feesRouter);
 router.use('/files', filesRouter);
+router.use('/blocks', blocksRouter);
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

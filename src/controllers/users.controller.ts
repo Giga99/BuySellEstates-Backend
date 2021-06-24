@@ -149,36 +149,6 @@ export class UsersController {
         );
     }
 
-    blockUnblockUser = (req: express.Request, res: express.Response) => {
-        let username = req.body.username
-        let blockedUsername = req.body.blockedUsername
-
-        Block.findOne(
-            { 'username': username, 'blockedUsername': blockedUsername },
-            (err, block) => {
-                if (err) console.log(err);
-                else {
-                    if (block) {
-                        Block.collection.deleteOne({ 'username': username, 'blockedUsername': blockedUsername }).then((block) => {
-                            res.status(200).json({ 'message': 'user unblocked' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
-                    } else {
-                        let block = new Block({ 'username': username, 'blockedUsername': blockedUsername });
-                        block.save().then((block) => {
-                            res.status(200).json({ 'message': 'user blocked' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
-                    }
-                }
-            }
-        );
-    }
-
     getUserByUsername = (req: express.Request, res: express.Response) => {
         let username = req.body.username
 

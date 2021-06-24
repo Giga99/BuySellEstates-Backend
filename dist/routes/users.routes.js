@@ -11,7 +11,6 @@ usersRouter.route('/updateUserUsername').post((req, res) => new users_controller
 usersRouter.route('/updateUserEmail').post((req, res) => new users_controller_1.UsersController().updateUserEmail(req, res));
 usersRouter.route('/answerUserRegistration').post((req, res) => new users_controller_1.UsersController().answerUserRegistration(req, res));
 usersRouter.route('/deleteUser').post((req, res) => new users_controller_1.UsersController().deleteUser(req, res));
-usersRouter.route('/blockUnblockUser').post((req, res) => new users_controller_1.UsersController().blockUnblockUser(req, res));
 usersRouter.route('/getUserByUsername').post((req, res) => new users_controller_1.UsersController().getUserByUsername(req, res));
 usersRouter.route('/getRegistrationRequests').get((req, res) => new users_controller_1.UsersController().getRegistrationRequests(req, res));
 usersRouter.route('/getAllUsers').get((req, res) => new users_controller_1.UsersController().getAllUsers(req, res));

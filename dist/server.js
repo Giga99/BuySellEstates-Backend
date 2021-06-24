@@ -14,6 +14,7 @@ const offers_routes_1 = __importDefault(require("./routes/offers.routes"));
 const messages_routes_1 = __importDefault(require("./routes/messages.routes"));
 const fees_routes_1 = __importDefault(require("./routes/fees.routes"));
 const files_routes_1 = __importDefault(require("./routes/files.routes"));
+const blocks_routes_1 = __importDefault(require("./routes/blocks.routes"));
 const app = express_1.default();
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
@@ -30,6 +31,7 @@ router.use('/offers', offers_routes_1.default);
 router.use('/messages', messages_routes_1.default);
 router.use('/fees', fees_routes_1.default);
 router.use('/files', files_routes_1.default);
+router.use('/blocks', blocks_routes_1.default);
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

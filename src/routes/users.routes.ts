@@ -22,10 +22,6 @@ usersRouter.route('/deleteUser').post(
     (req, res) => new UsersController().deleteUser(req, res)
 );
 
-usersRouter.route('/blockUnblockUser').post(
-    (req, res) => new UsersController().blockUnblockUser(req, res)
-);
-
 usersRouter.route('/getUserByUsername').post(
     (req, res) => new UsersController().getUserByUsername(req, res)
 );

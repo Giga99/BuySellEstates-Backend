@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const user_1 = __importDefault(require("../models/user"));
-const block_1 = __importDefault(require("../models/block"));
 class UsersController {
     constructor() {
         this.updateUserInfo = (req, res) => {
@@ -131,33 +130,6 @@ class UsersController {
                     }
                     else {
                         res.status(400).json({ 'message': 'user not found' });
-                    }
-                }
-            });
-        };
-        this.blockUnblockUser = (req, res) => {
-            let username = req.body.username;
-            let blockedUsername = req.body.blockedUsername;
-            block_1.default.findOne({ 'username': username, 'blockedUsername': blockedUsername }, (err, block) => {
-                if (err)
-                    console.log(err);
-                else {
-                    if (block) {
-                        block_1.default.collection.deleteOne({ 'username': username, 'blockedUsername': blockedUsername }).then((block) => {
-                            res.status(200).json({ 'message': 'user unblocked' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
-                    }
-                    else {
-                        let block = new block_1.default({ 'username': username, 'blockedUsername': blockedUsername });
-                        block.save().then((block) => {
-                            res.status(200).json({ 'message': 'user blocked' });
-                        }).catch((err) => {
-                            console.log(err);
-                            res.status(400).json({ 'message': err });
-                        });
                     }
                 }
             });
