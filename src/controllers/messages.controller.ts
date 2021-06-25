@@ -153,17 +153,31 @@ export class MessagesController {
 
     toggleArchive = (req: express.Request, res: express.Response) => {
         let id = req.body.id;
+        let isUser1 = req.body.isUser1;
         let active = req.body.active;
 
-        Thread.findOneAndUpdate(
-            { 'id': id },
-            { 'active': active },
-            (err, thread) => {
-                if (err) console.log(err);
-                else {
-                    res.status(200).json({ 'message': 'thread activity changed' });
+        if (isUser1) {
+            Thread.findOneAndUpdate(
+                { 'id': id },
+                { 'active1': active },
+                (err, thread) => {
+                    if (err) console.log(err);
+                    else {
+                        res.status(200).json({ 'message': 'thread activity changed' });
+                    }
                 }
-            }
-        );
+            );
+        } else {
+            Thread.findOneAndUpdate(
+                { 'id': id },
+                { 'active2': active },
+                (err, thread) => {
+                    if (err) console.log(err);
+                    else {
+                        res.status(200).json({ 'message': 'thread activity changed' });
+                    }
+                }
+            );
+        }
     }
 }

@@ -17,7 +17,12 @@ let Thread = new Schema(
             type: String,
             required: true
         },
-        active: {
+        active1: {
+            type: Boolean,
+            default: true,
+            required: true
+        },
+        active2: {
             type: Boolean,
             default: true,
             required: true
