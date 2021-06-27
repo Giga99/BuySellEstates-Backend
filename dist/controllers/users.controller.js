@@ -79,21 +79,21 @@ class UsersController {
                                 console.log(err);
                             else {
                                 if (user) {
-                                    res.status(400).json({ 'message': 'email exists' });
+                                    res.status(200).json({ 'message': 'email exists' });
                                 }
                                 else {
                                     user_1.default.collection.updateOne({ 'email': oldEmail, 'password': password }, { $set: { 'email': newEmail } }).then((block) => {
                                         res.status(200).json({ 'message': 'email updated' });
                                     }).catch((err) => {
                                         console.log(err);
-                                        res.status(400).json({ 'message': err });
+                                        res.status(200).json({ 'message': err });
                                     });
                                 }
                             }
                         });
                     }
                     else {
-                        res.status(400).json({ 'message': 'user not found' });
+                        res.status(200).json({ 'message': 'user not found' });
                     }
                 }
             });

@@ -9,7 +9,14 @@ const offer_1 = __importDefault(require("../models/offer"));
 class OffersController {
     constructor() {
         this.checkEstateAvailability = (req, res) => {
-            offer_1.default.find({ 'estateId': req.body.estateId, 'acceptedByAgent': true, $or: [{ 'dateFrom': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }, { 'dateTo': { $gte: req.body.dateFrom, $lte: req.body.dateTo } }] }, (err, offers) => {
+            offer_1.default.find({
+                'estateId': req.body.estateId, 'acceptedByAgent': true, $or: [
+                    { 'dateFrom': { $gte: req.body.dateFrom, $lte: req.body.dateTo } },
+                    { 'dateTo': { $gte: req.body.dateFrom, $lte: req.body.dateTo } },
+                    { $and: [{ 'dateFrom': { $lte: req.body.dateFrom }, 'dateTo': { $gte: req.body.dateTo } }] },
+                    { $and: [{ 'dateFrom': { $gte: req.body.dateFrom }, 'dateTo': { $lte: req.body.dateTo } }] }
+                ]
+            }, (err, offers) => {
                 if (err)
                     console.log(err);
                 else {
