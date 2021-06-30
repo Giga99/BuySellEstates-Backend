@@ -35,7 +35,6 @@ class MessagesController {
                                 let id = threads.length + 1;
                                 let thread = new thread_1.default(req.body);
                                 thread.id = id;
-                                console.log(thread);
                                 thread.save().then(() => {
                                     res.status(200).json({ 'id': id });
                                 }).catch((err) => {
